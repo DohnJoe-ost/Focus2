@@ -1,6 +1,7 @@
 #include <stdio.h>
 
-#include "game_IO.h"
+#include "game_Io.h"
+
 
 
 int main() {
@@ -14,5 +15,12 @@ int main() {
     initialize_board(board);
 
     print_board(board);
+
+    stack_size(board);
+
+    make_move(board, players);
+
     return 0;
 }
+
+
