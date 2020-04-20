@@ -107,14 +107,14 @@ struct square * pop(struct square *top){
     struct square *curr = top;
     if(curr!=NULL){
         top = curr->stack;
-        printf("Stack Data: %d\n", curr->num_pieces);
+        //printf("Stack Data: %d\n", curr->num_pieces);
         free(curr);
     }
     return top;
 }
 
 
-void stack_size(square size[BOARD_SIZE][BOARD_SIZE])
+void stack_size(square size[BOARD_SIZE][BOARD_SIZE], int a, int b, int c, int d)
 {
 
 
@@ -126,10 +126,10 @@ void stack_size(square size[BOARD_SIZE][BOARD_SIZE])
     char column[4] = {'R', 'o', 'w', 's', '\0'};
 
     printf("\n~~ Number of pieces in each square ~~\n\n  Columns  ");
-    printf("\n  1   2   3   4   5   6   7   8\n");  // prints number of each column
+    printf("\n  0   1   2   3   4   5   6   7\n");  // prints number of each column
 
 
-    for(int i = 0; i < BOARD_SIZE; i ++)
+    for(int i = 0; i < BOARD_SIZE; i++)
     {
         for (int j = 0; j < BOARD_SIZE; j++)
         {
@@ -142,12 +142,24 @@ void stack_size(square size[BOARD_SIZE][BOARD_SIZE])
                     if (size[i][j].stack->p_color == GREEN)
                     {
                         top = push(1, top);
-                        //top = push(2, top);
+
+                        if (size[a][b].type == VALID)
+                            top = pop(top);
+                        if (size[c][d].type == VALID)
+                            top = push(2, top);
+
+
                         printf("| %d ", top->num_pieces);
                     }
                     else if (size[i][j].stack->p_color == RED)
                     {
                         top = push(1, top);
+
+                        if (size[a][b].type == VALID)
+                            top = pop(top);
+                        if (size[c][d].type == VALID)
+                            top = push(2, top);
+
                         printf("| %d ", top->num_pieces);
                     }
                 }
@@ -155,12 +167,9 @@ void stack_size(square size[BOARD_SIZE][BOARD_SIZE])
             else
                 printf("| - ");
         }
-        printf("|  %d   %c\n", i+1, column[i]);   // prints edge of board and number of rows
+        printf("|  %d   %c\n", i, column[i]);   // prints edge of board and number of rows
 
     }
 
 
 }
-
-
-
