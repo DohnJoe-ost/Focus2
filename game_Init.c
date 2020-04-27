@@ -114,19 +114,76 @@ struct square * pop(struct square *top){
 }
 
 
-void stack_size(square size[BOARD_SIZE][BOARD_SIZE], int a, int b, int c, int d)
+//void stack_size(square size[BOARD_SIZE][BOARD_SIZE], int a, int b, int c, int d)
+//{
+//
+//
+//    //pointer to the top of the stack
+//    struct square *top = NULL;
+//    //pointer to the current element of the stack
+//    struct square *curr = NULL;
+//
+//    char column[4] = {'R', 'o', 'w', 's', '\0'};
+//
+//    printf("\n~~ Number of pieces in each square ~~\n\n  Columns  ");
+//    printf("\n  0   1   2   3   4   5   6   7\n");  // prints number of each column
+//
+//
+//    for(int i = 0; i < BOARD_SIZE; i++)
+//    {
+//        for (int j = 0; j < BOARD_SIZE; j++)
+//        {
+//            if(size[i][j].type == VALID)
+//            {
+//                if(size[i][j].stack == NULL)
+//                    printf("|   ");
+//
+//                else{
+//                    if (size[i][j].stack->p_color == GREEN)
+//                    {
+//                        top = push(1, top);
+//
+//                        if (size[a][b].type == VALID)
+//                            top = pop(top);
+//                        if (size[c][d].type == VALID)
+//                            top = push(2, top);
+//
+//
+//                        printf("| %d ", top->num_pieces);
+//                    }
+//                    else if (size[i][j].stack->p_color == RED)
+//                    {
+//                        top = push(1, top);
+//
+//                        if (size[a][b].type == VALID)
+//                            top = pop(top);
+//                        if (size[c][d].type == VALID)
+//                            top = push(2, top);
+//
+//                        printf("| %d ", top->num_pieces);
+//                    }
+//                }
+//            }
+//            else
+//                printf("| - ");
+//        }
+//        printf("|  %d   %c\n", i, column[i]);   // prints edge of board and number of rows
+//
+//    }
+//
+//
+//}
+
+
+void numb_pieces(square size[BOARD_SIZE][BOARD_SIZE], int a, int b, int c, int d)
 {
+    int numPiece[7];
+    for(int i = 0; i <7; i++)  // initialize array to 0
+    {
+        numPiece[i] = 0;
+    }
+    printf("\n");
 
-
-    //pointer to the top of the stack
-    struct square *top = NULL;
-    //pointer to the current element of the stack
-    struct square *curr = NULL;
-
-    char column[4] = {'R', 'o', 'w', 's', '\0'};
-
-    printf("\n~~ Number of pieces in each square ~~\n\n  Columns  ");
-    printf("\n  0   1   2   3   4   5   6   7\n");  // prints number of each column
 
 
     for(int i = 0; i < BOARD_SIZE; i++)
@@ -141,35 +198,77 @@ void stack_size(square size[BOARD_SIZE][BOARD_SIZE], int a, int b, int c, int d)
                 else{
                     if (size[i][j].stack->p_color == GREEN)
                     {
-                        top = push(1, top);
+                        //size[i][j].number[i] = 1;
 
                         if (size[a][b].type == VALID)
-                            top = pop(top);
+                            size[a][b].number[i] = 0;
                         if (size[c][d].type == VALID)
-                            top = push(2, top);
+                            size[c][d].number[i] = i+1;
 
 
-                        printf("| %d ", top->num_pieces);
+                        printf("| %d ", size[i][j].number[i]);
                     }
                     else if (size[i][j].stack->p_color == RED)
                     {
-                        top = push(1, top);
+                        //size[i][j].number[i] = 1;
 
                         if (size[a][b].type == VALID)
-                            top = pop(top);
+                            size[a][b].number[i] = 0;
                         if (size[c][d].type == VALID)
-                            top = push(2, top);
+                            size[c][d].number[i] = i+1;
 
-                        printf("| %d ", top->num_pieces);
+                        printf("| %d ", size[i][j].number[i]);
                     }
                 }
             }
             else
                 printf("| - ");
         }
-        printf("|  %d   %c\n", i, column[i]);   // prints edge of board and number of rows
+        printf("|  %d\n", i);   // prints edge of board and number of rows
 
     }
-
-
 }
+
+
+/* This function places the first pieces onto
+ * the board */
+
+void first_pieces(square board[BOARD_SIZE][BOARD_SIZE])
+{
+    printf("\n");
+
+    for(int i = 0; i < BOARD_SIZE; i++)
+    {
+        for (int j = 0; j < BOARD_SIZE; j++)
+        {
+            if(board[i][j].type == VALID)
+            {
+                if(board[i][j].stack == NULL)
+                    printf("|   ");
+
+                else{
+                    if (board[i][j].stack->p_color == GREEN)
+                    {
+                        board[i][j].number[i] = 1;
+
+
+
+                        printf("| %d ", board[i][j].number[i]);
+                    }
+                    else if (board[i][j].stack->p_color == RED)
+                    {
+                        board[i][j].number[i] = 1;
+
+
+                        printf("| %d ", board[i][j].number[i]);
+                    }
+                }
+            }
+            else
+                printf("| - ");
+        }
+        printf("|  %d\n", i);   // prints edge of board and number of rows
+
+    }
+}
+
