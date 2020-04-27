@@ -16,11 +16,11 @@ int main() {
 
     print_board(board);
 
-    stack_size(board);
+    first_pieces(board);
+
+   // stack_size(board);
 
     make_move(board, players);
 
     return 0;
 }
-
-
