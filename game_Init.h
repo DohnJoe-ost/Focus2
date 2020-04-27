@@ -13,7 +13,7 @@
 
 //colors that a piece can have
 typedef enum color {
-    RED,
+    RED = 1,
     GREEN
 }color;
 
@@ -30,7 +30,7 @@ typedef enum square_type {
 //Player
 typedef struct player{
     //the color associated with the player
-    color player_color;
+    enum color player_color;
 
     char name[20];
 
@@ -44,7 +44,7 @@ typedef struct player{
 // A piece
 typedef struct piece {
     //the color associated with a piece
-    color p_color;
+    enum color p_color;
 
     // This is a pointer to the next pieces
     // to create a stack. For this lab you do not have to think too much about it.
@@ -58,11 +58,15 @@ typedef struct square {
 
     square_type type;       // type of the square (VALID/INVALID)
 
-    color colour;
+    enum color colour;
 
     piece * stack;      //the piece or the top piece on the stack
 
+    int number[7];
+
     int num_pieces;    //number of pieces on the square
+
+    struct player play;
 
 }square;
 
@@ -74,7 +78,11 @@ void initialize_players(player players[PLAYERS_NUM]);
 //Function to create the board
 void initialize_board(square board[BOARD_SIZE][BOARD_SIZE]);
 
-void stack_size(square size[BOARD_SIZE][BOARD_SIZE]);
+void stack_size(square size[BOARD_SIZE][BOARD_SIZE], int a, int b, int c, int d);
+
+void numb_pieces(square size[BOARD_SIZE][BOARD_SIZE], int a, int b, int c, int d);
+
+void first_pieces(square board[BOARD_SIZE][BOARD_SIZE]);
 
 
 
